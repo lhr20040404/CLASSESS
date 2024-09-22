@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查看作业完成详情</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .assignment-details {
+            margin-bottom: 20px;
+        }
+        .student-list {
+            margin-top: 20px;
+        }
+        .student-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        .student-name {
+            font-weight: bold;
+            color: #333;
+        }
+        .submission-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .btn-view {
+            margin-left: 10px;
+        }
+        .status-late {
+            color: red;
+        }
+        .status-on-time {
+            color: green;
+        }
+        .status-missing {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="header">作业完成详情</h2>
+
+    <div class="assignment-details">
+        <h4>作业题目: 数学基础</h4>
+        <p><strong>题干：</strong> 解以下方程：x^2 - 4x + 4 = 0</p>
+        <p><strong>截止日期：</strong> 2024-09-15</p>
+    </div>
+
+    <div class="student-list">
+        <!-- Example of a student submission -->
+        <div class="student-item">
+            <div class="student-name">张三</div>
+            <div class="submission-status">
+                <span>提交时间: 2024-09-14 16:30</span>
+                <span class="status-on-time">按时提交</span>
+                <button class="btn btn-primary btn-sm btn-view" onclick="viewSubmission(1)">查看作答</button>
+            </div>
+        </div>
+
+        <div class="student-item">
+            <div class="student-name">李四</div>
+            <div class="submission-status">
+                <span>提交时间: 2024-09-16 08:00</span>
+                <span class="status-late">迟交</span>
+                <button class="btn btn-primary btn-sm btn-view" onclick="viewSubmission(2)">查看作答</button>
+            </div>
+        </div>
+
+        <div class="student-item">
+            <div class="student-name">王五</div>
+            <div class="submission-status">
+                <span>未提交</span>
+                <span class="status-missing">未提交</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-secondary mt-4" onclick="goBack()">返回</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function viewSubmission(studentId) {
+        // 模拟查看学生提交作业的页面跳转，传递学生ID
+        window.location.href = `student_submission.html?studentId=${studentId}`;
+    }
+
+    function goBack() {
+        // 返回到查看作业完成情况页面
+        window.location.href = 'view_completion.html';
+    }
+</script>
+
+</body>
+</html>

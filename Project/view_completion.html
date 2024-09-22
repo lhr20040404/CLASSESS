@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查看作业完成情况</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .assignment-list {
+            margin-top: 20px;
+        }
+        .assignment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        .assignment-title {
+            font-weight: bold;
+            color: #333;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+        }
+        .btn-view {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="header">查看作业完成情况</h2>
+
+    <div class="assignment-list">
+        <!-- Example of an assignment item -->
+        <div class="assignment-item">
+            <div class="assignment-title">作业 1: 数学基础</div>
+            <div class="stats">
+                <div>截止日期: 2024-09-15</div>
+                <div>提交情况: 20/25 已提交</div>
+                <button class="btn btn-primary btn-sm btn-view" onclick="viewDetails(1)">查看详情</button>
+            </div>
+        </div>
+
+        <div class="assignment-item">
+            <div class="assignment-title">作业 2: 英语阅读</div>
+            <div class="stats">
+                <div>截止日期: 2024-09-20</div>
+                <div>提交情况: 23/25 已提交</div>
+                <button class="btn btn-primary btn-sm btn-view" onclick="viewDetails(2)">查看详情</button>
+            </div>
+        </div>
+
+        <div class="assignment-item">
+            <div class="assignment-title">作业 3: 科学实验</div>
+            <div class="stats">
+                <div>截止日期: 2024-09-25</div>
+                <div>提交情况: 18/25 已提交</div>
+                <button class="btn btn-primary btn-sm btn-view" onclick="viewDetails(3)">查看详情</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function viewDetails(assignmentId) {
+        // 在点击查看详情后跳转到作业详细完成情况页面
+        window.location.href = `assignment_details.html?id=${assignmentId}`;
+    }
+</script>
+
+</body>
+</html>
