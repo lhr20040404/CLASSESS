@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- 引入Bootstrap CSS库 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-select, .form-control {
+            margin-bottom: 15px;
+        }
+        .btn-custom {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2 class="login-header">登录CLASSESS</h2>
+    <form id="loginForm">
+        <div class="mb-3">
+            <label for="userRole" class="form-label">选择身份</label>
+            <select class="form-select" id="userRole" required>
+                <option value="" disabled selected>请选择身份</option>
+                <option value="teacher">教师</option>
+                <option value="student">学生</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">账号</label>
+            <input type="text" class="form-control" id="username" placeholder="请输入账号" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input type="password" class="form-control" id="password" placeholder="请输入密码" required>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-custom">登录</button>
+        </div>
+        <div class="text-center mt-3">
+            <a href="register.html">注册</a>
+        </div>
+    </form>
+</div>
+
+<!-- 引入Bootstrap JS库 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 获取注册页面传递的用户名并填充
+    var urlParams = new URLSearchParams(window.location.search);
+    var username = urlParams.get('username');
+    if (username) {
+        document.getElementById('username').value = username;
+    }
+
+    // 处理表单提交逻辑，根据身份跳转到不同的页面
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // 获取用户身份和账号
+        var userRole = document.getElementById('userRole').value;
+        var username = document.getElementById('username').value;
+
+        if (!userRole) {
+            alert('请选择身份！');
+            return;
+        }
+
+        // 跳转到不同的页面
+        if (userRole === 'student') {
+            // 跳转到学生界面，并携带账号信息
+            window.location.href = 'student_dashboard.html?username=' + encodeURIComponent(username);
+        } else if (userRole === 'teacher') {
+            // 跳转到教师界面
+            window.location.href = 'teacher_dashboard.html?username=' + encodeURIComponent(username);
+        }
+    });
+</script>
+
+</body>
+</html>

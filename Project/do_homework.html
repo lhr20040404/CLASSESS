@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业提交页面</title>
+    <!-- 引入Bootstrap CSS库 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .homework-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .homework-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .homework-content {
+            margin-bottom: 20px;
+        }
+        .homework-input {
+            margin-bottom: 20px;
+        }
+        .submit-button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container homework-container">
+    <h2 class="homework-header">作业提交界面</h2>
+
+    <div class="homework-content">
+        <h4>作业标题：数学作业</h4>
+        <p><strong>截止日期：</strong> <span id="deadline">2024-09-25 23:59</span></p>
+        <p><strong>作业详细内容：</strong></p>
+        <p>请根据所学内容完成以下题目，并上传解答文件。</p>
+        <ul>
+            <li>题目1：解方程 x^2 - 4x + 4 = 0</li>
+            <li>题目2：计算三角形的面积，其中边长分别为 3, 4, 5。</li>
+        </ul>
+    </div>
+
+    <div class="homework-input">
+        <label for="answer" class="form-label">作答区：</label>
+        <textarea class="form-control" id="answer" rows="5" placeholder="请输入您的作答"></textarea>
+    </div>
+
+    <div class="homework-input">
+        <label for="attachment" class="form-label">上传附件（图片或文档）：</label>
+        <input type="file" class="form-control" id="attachment" multiple>
+    </div>
+
+    <div class="d-grid">
+        <button class="btn btn-primary submit-button" id="submitBtn">提交作业</button>
+    </div>
+</div>
+
+<!-- Modal 弹窗 -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel">提示</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalMessage">
+        <!-- 这里会显示提交结果 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 引入Bootstrap和JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var homeworkId = urlParams.get('homeworkId'); 
+    // 获取当前时间和截止时间
+    var deadlineText = document.getElementById('deadline').innerText;
+    var deadline = new Date(deadlineText);
+    
+    // 假设作业 ID 为 1，实际应根据情况设置
+    var homeworkId = 1; // 替换为实际的作业 ID
+
+    // 提交按钮点击事件
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        var answer = document.getElementById('answer').value;
+        var currentDate = new Date();
+
+        if (!answer.trim()) {
+            alert('请先输入作答内容！');
+            return;
+        }
+
+        if (currentDate > deadline) {
+            document.getElementById('modalMessage').innerText = '提交失败，不在作业完成时间内。即将返回学生页面...';
+            var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
+
+            setTimeout(function() {
+                window.location.href = 'student_dashboard.html'; // 超时后返回学生页面
+            }, 1000); // 1秒后跳转
+        } else {
+            document.getElementById('modalMessage').innerText = '作业提交成功！即将返回学生页面...';
+            var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
+
+            setTimeout(function() {
+                window.location.href = 'student_dashboard.html?completedHomeworkId=' + homeworkId; // 成功后返回学生页面，并传递作业 ID
+            }, 1000); // 1秒后跳转
+        }
+    });
+</script>
+
+</body>
+</html>
