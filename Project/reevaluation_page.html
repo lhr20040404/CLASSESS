@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复评作业界面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .reevaluation-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .reevaluation-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .homework-section, .ai-section, .guidance-section {
+            margin-bottom: 20px;
+        }
+        .ai-section {
+            border: 1px solid #f8d7da;
+            background-color: #f8d7da;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .ai-section:hover {
+            background-color: #f1b0b7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container reevaluation-container">
+    <h2 class="reevaluation-header">复评作业界面</h2>
+
+    <div class="homework-section">
+        <h4>作业题目：数学作业</h4>
+        <p><strong>题干：</strong> 解方程 x^2 - 4x + 4 = 0</p>
+        <p><strong>正确答案：</strong> x = 2</p>
+        <p><strong>学生提交答案：</strong> x = 2, 上传文件: <a href="#">答案附件.pdf</a></p>
+        <p><strong>学生评分：</strong> 85/100</p>
+    </div>
+
+    <div class="guidance-section">
+        <label for="teacherScore" class="form-label">教师评分：</label>
+        <input type="number" class="form-control" id="teacherScore" placeholder="输入评分">
+        <label for="teacherFeedback" class="form-label mt-3">教师评语：</label>
+        <textarea class="form-control" id="teacherFeedback" rows="4" placeholder="输入教师评语"></textarea>
+    </div>
+
+    <div class="ai-section" id="aiFeedback">
+        <strong>AI智能辅评区域：</strong>AI检测到学生答案中的小问题，建议复核方程步骤。
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        <!-- 维持原评按钮 -->
+        <button class="btn btn-secondary" id="maintainOriginalBtn">维持原评</button>
+
+        <!-- 提交复评按钮 -->
+        <button class="btn btn-primary" id="submitReevaluationBtn">提交复评</button>
+    </div>
+</div>
+
+<!-- 提交成功的弹窗 -->
+<div class="modal fade" id="submitSuccessModal" tabindex="-1" aria-labelledby="submitSuccessModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="submitSuccessModalLabel">提示</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        提交复评成功！即将返回教师页面...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI提示的弹窗 -->
+<div class="modal fade" id="aiDetailsModal" tabindex="-1" aria-labelledby="aiDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="aiDetailsModalLabel">AI 辅评详细提示</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        AI 检测到学生的答案步骤可能存在不完整的情况，建议进一步检查中间步骤的正确性。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 监听维持原评按钮点击
+    document.getElementById('maintainOriginalBtn').addEventListener('click', function() {
+        // 直接返回教师页面
+        window.location.href = 'teacher_dashboard.html';
+    });
+
+    // 监听提交复评按钮点击
+    document.getElementById('submitReevaluationBtn').addEventListener('click', function() {
+        // 显示提交成功弹窗
+        var successModal = new bootstrap.Modal(document.getElementById('submitSuccessModal'));
+        successModal.show();
+
+        // 在弹窗关闭后，1秒后返回教师页面
+        setTimeout(function() {
+            window.location.href = 'teacher_dashboard.html';
+        }, 1000);
+    });
+
+    // AI 辅评区域点击显示详细提示
+    document.getElementById('aiFeedback').addEventListener('click', function() {
+        var aiModal = new bootstrap.Modal(document.getElementById('aiDetailsModal'));
+        aiModal.show();
+    });
+</script>
+
+</body>
+</html>

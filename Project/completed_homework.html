@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>已完成作业详情</title>
+    <!-- 引入Bootstrap CSS库 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .result-item {
+            margin-bottom: 15px;
+        }
+        .btn-back {
+            width: 100%;
+        }
+        .image-preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="header">已完成作业详情</h2>
+
+    <div class="result-item">
+        <h5>题目题干</h5>
+        <p>请根据所学内容完成以下题目，并上传解答文件。</p>
+    </div>
+
+    <div class="result-item">
+        <h5>完成时间</h5>
+        <p id="completionTime">2024-09-20 10:00</p>
+    </div>
+
+    <div class="result-item">
+        <h5>正确参考答案</h5>
+        <div id="referenceAnswer">
+            <p>正确答案的文本描述。</p>
+            <img src="path_to_reference_image.jpg" alt="正确答案" class="image-preview"> <!-- 示例图片 -->
+        </div>
+    </div>
+
+    <div class="result-item">
+        <h5>用户提交的答案</h5>
+        <div id="userAnswer">
+            <p>用户提交答案的文本描述。</p>
+            <img src="path_to_user_image.jpg" alt="用户提交的答案" class="image-preview"> <!-- 示例图片 -->
+        </div>
+    </div>
+
+    <div class="result-item">
+        <h5>获得的分数</h5>
+        <p id="score">90分</p>
+    </div>
+
+    <div class="result-item">
+        <h5>评分者姓名</h5>
+        <p id="reviewerName">张老师</p>
+    </div>
+
+    <div class="d-grid">
+        <button class="btn btn-primary btn-back" onclick="goBack()">返回</button>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = 'student_dashboard.html'; // 返回学生页面
+    }
+</script>
+
+<!-- 引入Bootstrap JS库 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>已截止作业列表</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        .assignment-item {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .assignment-item:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">已截止作业列表</h2>
+
+    <!-- 动态生成作业列表 -->
+    <ul id="assignmentList" class="list-group">
+        <!-- 示例作业 -->
+        <li class="assignment-item" data-id="1">作业 1: 数学作业 - 截止日期 2024-09-25</li>
+        <li class="assignment-item" data-id="2">作业 2: 物理作业 - 截止日期 2024-09-20</li>
+    </ul>
+</div>
+
+<script>
+    // 给每个作业项添加点击事件，跳转到复评页面
+    document.querySelectorAll('.assignment-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+            var assignmentId = this.getAttribute('data-id');
+            window.location.href = 'reevaluation_page.html?assignmentId=' + assignmentId;
+        });
+    });
+</script>
+
+</body>
+</html>

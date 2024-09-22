@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>已发布作业</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .assignment-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .assignment-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .exit-button,
+        .edit-button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container assignment-container">
+    <h2 class="assignment-header">已发布作业</h2>
+
+    <div class="form-section">
+        <label class="form-label">作业题目</label>
+        <p id="assignmentTitle">Example Title</p>
+    </div>
+
+    <div class="form-section">
+        <label class="form-label">题干</label>
+        <p id="assignmentContent">Example Content</p>
+    </div>
+
+    <div class="form-section">
+        <label class="form-label">截止日期</label>
+        <p id="deadline">2024-10-01 23:59</p>
+    </div>
+
+    <div class="form-section">
+        <label class="form-label">标准答案</label>
+        <p id="standardAnswer">Example Standard Answer</p>
+    </div>
+
+    <div class="form-section">
+        <label class="form-label">给分点</label>
+        <p id="gradingPoints">Example Grading Points</p>
+    </div>
+
+    <div class="button-group">
+        <button type="button" class="btn btn-secondary exit-button" id="exitButton">退出</button>
+        <button type="button" class="btn btn-primary edit-button" id="editButton">修改</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('exitButton').addEventListener('click', function() {
+        window.location.href = 'teacher_dashboard.html';  // 返回教师主页面
+    });
+
+    document.getElementById('editButton').addEventListener('click', function() {
+        window.location.href = 'draft_assignment.html';  // 跳转到待发布作业页面进行修改
+    });
+</script>
+
+</body>
+</html>

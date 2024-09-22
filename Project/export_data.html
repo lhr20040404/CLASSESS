@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查看已截止作业</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        .assignment-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .assignment-item:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">已截止作业列表</h2>
+    
+    <div class="assignment-item" onclick="viewAssignment(1)">
+        <h5>作业 1: 数学作业</h5>
+        <p>截止日期: 2024-09-25</p>
+    </div>
+    
+    <div class="assignment-item" onclick="viewAssignment(2)">
+        <h5>作业 2: 历史论文</h5>
+        <p>截止日期: 2024-09-30</p>
+    </div>
+    
+    <!-- 可以添加更多作业项 -->
+    
+    <button class="btn btn-secondary mt-4" onclick="window.location.href='teacher_dashboard.html'">返回</button>
+</div>
+
+<script>
+    function viewAssignment(assignmentId) {
+        window.location.href = 'export_assignment.html?assignmentId=' + assignmentId;
+    }
+</script>
+
+</body>
+</html>

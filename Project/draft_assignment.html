@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改已发布作业</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        .assignment-detail {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">修改已发布作业</h2>
+
+    <div class="assignment-detail">
+        <h4>作业标题</h4>
+        <input type="text" class="form-control mb-3" id="assignmentTitle" value="数学作业">
+
+        <h4>作业题干</h4>
+        <textarea class="form-control mb-3" id="assignmentContent" rows="5">请根据所学内容完成以下题目，并上传解答文件。</textarea>
+
+        <h4>截止日期</h4>
+        <input type="datetime-local" class="form-control mb-3" id="assignmentDeadline" value="2024-09-25T23:59">
+
+        <h4>标准答案</h4>
+        <textarea class="form-control mb-3" id="standardAnswer" rows="3">x = 2</textarea>
+
+        <h4>答案给分点</h4>
+        <textarea class="form-control mb-3" id="scoringPoints" rows="3">1. 正确解法； 2. 清晰的步骤； 3. 最终答案。</textarea>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-secondary" onclick="window.location.href='published_homework.html'">取消修改</button>
+        <button class="btn btn-primary" id="publishBtn">完成并发布</button>
+    </div>
+</div>
+
+<script>
+    // 点击发布按钮的事件
+    document.getElementById('publishBtn').addEventListener('click', function() {
+        // 获取输入内容
+        var title = document.getElementById('assignmentTitle').value;
+        var content = document.getElementById('assignmentContent').value;
+        var deadline = document.getElementById('assignmentDeadline').value;
+        var standardAnswer = document.getElementById('standardAnswer').value;
+        var scoringPoints = document.getElementById('scoringPoints').value;
+
+        // 在这里可以添加逻辑来保存修改内容，例如发送到服务器
+        alert('作业已更新并发布！');
+
+        // 跳转回已发布作业页面
+        window.location.href = 'published_homework.html';
+    });
+</script>
+
+</body>
+</html>
