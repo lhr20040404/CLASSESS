@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +44,7 @@
         <p><strong>作业详细内容：</strong></p>
         <p>请根据所学内容完成以下题目，并上传解答文件。</p>
         <ul>
-            <li>题目1：解方程 x^2 - 4x + 4 = 0</li>
+            <li>题目1：解方程 x<sup>2</sup> - 4x + 4 = 0</li>
             <li>题目2：计算三角形的面积，其中边长分别为 3, 4, 5。</li>
         </ul>
     </div>
@@ -82,18 +82,29 @@
 <!-- 引入Bootstrap和JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    // 获取 URL 参数中的 homeworkId 和 studentId
     var urlParams = new URLSearchParams(window.location.search);
-    var homeworkId = urlParams.get('homeworkId'); 
-    // 获取当前时间和截止时间
+    var homeworkId = urlParams.get('homeworkId'); // 假设通过 URL 传递
+    var studentId = urlParams.get('studentId');   // 假设通过 URL 传递
+
+    // 如果没有通过 URL 传递 homeworkId 或 studentId，可以设置默认值或通过其他方式获取
+    if (!homeworkId) {
+        homeworkId = 'defaultHomeworkId'; // 替换为实际获取方式
+    }
+    if (!studentId) {
+        studentId = 'defaultStudentId'; // 替换为实际获取方式
+    }
+
+    // 获取截止日期
     var deadlineText = document.getElementById('deadline').innerText;
-    var deadline = new Date(deadlineText);
-    
-    // 假设作业 ID 为 1，实际应根据情况设置
-    var homeworkId = 1; // 替换为实际的作业 ID
+    var deadline = new Date(deadlineText.replace(' ', 'T')); // 确保格式为 ISO 8601
 
     // 提交按钮点击事件
     document.getElementById('submitBtn').addEventListener('click', function() {
         var answer = document.getElementById('answer').value;
+        var attachmentInput = document.getElementById('attachment');
+        var attachments = attachmentInput.files;
+
         var currentDate = new Date();
 
         if (!answer.trim()) {
@@ -108,15 +119,56 @@
 
             setTimeout(function() {
                 window.location.href = 'student_dashboard.html'; // 超时后返回学生页面
-            }, 1000); // 1秒后跳转
+            }, 2000); // 2秒后跳转
         } else {
-            document.getElementById('modalMessage').innerText = '作业提交成功！即将返回学生页面...';
-            var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
-            resultModal.show();
+            // 构建 FormData 对象
+            var formData = new FormData();
+            formData.append('homeworkId', homeworkId);
+            formData.append('studentId', studentId);
+            formData.append('answerText', answer);
 
-            setTimeout(function() {
-                window.location.href = 'student_dashboard.html?completedHomeworkId=' + homeworkId; // 成功后返回学生页面，并传递作业 ID
-            }, 1000); // 1秒后跳转
+            // 添加文件到 formData
+            for (var i = 0; i < attachments.length; i++) {
+                formData.append('attachments', attachments[i]);
+            }
+
+            // 发送 POST 请求到后端
+            fetch('/homework/submit', { // 根据实际后端路径修改
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('网络响应不是OK');
+                }
+            })
+            .then(data => {
+                // 根据后端返回的数据显示不同的消息
+                if (data.message === 'Homework submitted successfully') {
+                    document.getElementById('modalMessage').innerText = '作业提交成功！即将返回学生页面...';
+                } else {
+                    document.getElementById('modalMessage').innerText = '提交失败：' + data.message + '。即将返回学生页面...';
+                }
+
+                var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                resultModal.show();
+
+                setTimeout(function() {
+                    window.location.href = 'student_dashboard.html?completedHomeworkId=' + homeworkId; // 成功后返回学生页面，并传递作业 ID
+                }, 2000); // 2秒后跳转
+            })
+            .catch(error => {
+                console.error('提交作业时出错:', error);
+                document.getElementById('modalMessage').innerText = '提交失败，请稍后重试。即将返回学生页面...';
+                var resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+                resultModal.show();
+
+                setTimeout(function() {
+                    window.location.href = 'student_dashboard.html'; // 出错后返回学生页面
+                }, 2000); // 2秒后跳转
+            });
         }
     });
 </script>
